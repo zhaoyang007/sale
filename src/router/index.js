@@ -1,41 +1,13 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import SupplierLogin from '../views/supplier/login.vue'
 import SellerLogin from '../views/seller/login.vue'
 
 Vue.use(VueRouter)
 
 const routes = [
-  // {
-  //   path: '/',
-  //   name: 'home',
-  //   component: SupplierLogin
-  // },
-  // 供应商
   {
-    path: '/supplier/login',
-    name: 'SupplierLogin',
-    component: SupplierLogin
-  },
-  {
-    path: '/supplier/vehicleList',
-    name: 'supplierVehicleList',
-    component: () => import(/* webpackChunkName: "supplierVehicleList" */ '../views/supplier/vehicleList.vue')
-  },
-  {
-    path: '/supplier/vehicleDetail',
-    name: 'supplierVehicleDetail',
-    component: () => import(/* webpackChunkName: "supplierVehicleDetail" */ '../views/supplier/vehicleDetail.vue')
-  },
-  {
-    path: '/supplier/sellList',
-    name: 'supplierSellList',
-    component: () => import(/* webpackChunkName: "supplierSellList" */ '../views/supplier/sellList.vue')
-  },
-  {
-    path: '/supplier/payforList',
-    name: 'supplierPayforList',
-    component: () => import(/* webpackChunkName: "supplierPayforList" */ '../views/supplier/payforList.vue')
+    path: '/',
+    redirect: '/seller/login'
   },
   // 销售商
   {

@@ -10,13 +10,6 @@ module.exports = {
           '^/User': ''
         }
       },
-      '/SupCar': {
-        target: 'http://115.28.106.108:8999/SupCar',
-        changeOrigin: true,
-        pathRewrite:{
-          '^/SupCar': ''
-        }
-      },
       '/SaleCar': {
         target: 'http://115.28.106.108:8991/SaleCar',
         changeOrigin: true,

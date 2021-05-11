@@ -4,7 +4,6 @@ import VueAxios from 'vue-axios'
 
 Vue.use(VueAxios, axios)
 
-// axios.defaults.baseURL = 'http://115.28.106.108:8999'
-// axios.defaults.baseURL = 'http://115.28.106.108:8991'
+axios.defaults.baseURL = 'http://115.28.106.108:8991'
 
 export default axios
