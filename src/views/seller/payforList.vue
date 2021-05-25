@@ -4,6 +4,7 @@
       赔付金额：{{ payforMoney }}
     </div>
     <van-button type="info" size="small" @click="toPayforDetail" style="margin-bottom: 20px;">添加赔付信息</van-button>
+    <van-button size="small" class="back" @click="goBack">返 回</van-button>
     <van-cell
       center
       v-for="(item, index) in payforList"
@@ -61,7 +62,7 @@ export default {
         path: '/seller/payforDetail',
         query: {
           CarId: this.$route.query.CarId,
-          SaleId: this.SaleId
+          SaleId: this.$route.query.SaleId
         }
       })
     },
@@ -85,6 +86,15 @@ export default {
             position: 'top'
           })
         })
+    },
+    // 返回
+    goBack () {
+      this.$router.push({
+        path: '/seller/vehicleList',
+        query: {
+          SaleId: this.$route.query.SaleId
+        }
+      })
     }
   }
 }
@@ -101,5 +111,9 @@ export default {
 }
 .van-cell__value {
   flex: 0 0 40px;
+}
+.back {
+  padding: 0 30px;
+  margin-left: 20px;
 }
 </style>

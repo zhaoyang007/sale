@@ -7,6 +7,7 @@
     </van-form>
     <div style="margin-top: 100px;">
       <van-button type="info" class="save" @click="editPayfor">保存</van-button>
+      <van-button class="back" @click="goBack">返 回</van-button>
     </div>
   </div>
 </template>
@@ -58,6 +59,16 @@ export default {
             position: 'top'
           })
         })
+    },
+    // 返回
+    goBack () {
+      this.$router.push({
+        path: '/seller/payforList',
+        query: {
+          CarId: this.$route.query.CarId,
+          SaleId: this.$route.query.SaleId
+        }
+      })
     }
   }
 }
@@ -69,8 +80,11 @@ export default {
     height: 38px;
   }
   .save {
-    padding: 0 29px;
+    padding: 0 30px;
     margin-right: 20px;
+  }
+  .back {
+    padding: 0 30px;
   }
 }
 </style>

@@ -14,12 +14,13 @@
         <van-col span="12">售卖总重量:{{ saleInfo.Totla_Weight }}</van-col>
       </van-row>
       <van-row gutter="10">
-        <van-col span="12">售卖均价:{{ saleInfo.Total_Amount }}</van-col>
+        <van-col span="12">售卖均价:{{ saleInfo.Rang_Amount }}</van-col>
         <van-col span="12"></van-col>
       </van-row>
     </div>
     <van-button type="info" size="small" class="frush" @click="getSaleInfo">刷 新</van-button>
     <van-button type="info" size="small" @click="toSellDetail('')" style="margin-left: 20px;">添加售卖信息</van-button>
+    <van-button size="small" class="back" @click="goBack">返 回</van-button>
     <van-cell
       v-for="(item, index) in accountLists"
       :key="index"
@@ -101,7 +102,7 @@ export default {
         path: '/seller/sellDetail',
         query: {
           CarId: this.$route.query.CarId,
-          SaleId: this.saleInfo.SaleId,
+          SaleId: this.$route.query.SaleId,
           saleInfo
         }
       })
@@ -150,8 +151,16 @@ export default {
             position: 'top'
           })
         })
+    },
+    // 返回
+    goBack () {
+      this.$router.push({
+        path: '/seller/vehicleList',
+        query: {
+          SaleId: this.$route.query.SaleId
+        }
+      })
     }
-
   }
 }
 </script>
@@ -172,5 +181,9 @@ export default {
 .frush {
   margin-bottom: 20px;
   padding: 0 30px;
+}
+.back {
+  padding: 0 30px;
+  margin-left: 20px;
 }
 </style>

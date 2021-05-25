@@ -7,6 +7,7 @@
       <van-tab title="售完(欠款未收)"></van-tab>
       <van-tab title="完结"></van-tab>
     </van-tabs>
+    <van-button type="info" size="small" class="frush" @click="getVehicleList">刷 新</van-button>
     <div class="list">
       <van-cell
         v-for="(item, index) in vehicleList"
@@ -104,7 +105,8 @@ export default {
       this.$router.push({
         path: '/seller/sellList',
         query: {
-          CarId: id
+          CarId: id,
+          SaleId: this.$route.query.SaleId
         }
       })
     },
@@ -113,7 +115,8 @@ export default {
       this.$router.push({
         path: '/seller/payforList',
         query: {
-          CarId: id
+          CarId: id,
+          SaleId: this.$route.query.SaleId
         }
       })
     }
@@ -124,7 +127,7 @@ export default {
 <style lang="scss" scoped>
 .vehicle-list {
   .tabs {
-    margin-bottom: 20px;
+    margin: 20px 0;
   }
   /deep/ .van-tabs__nav--complete {
     padding: 0;
@@ -136,6 +139,10 @@ export default {
     .van-cell__title {
       text-align: left;
     }
+  }
+  .frush {
+    margin-bottom: 20px;
+    padding: 0 30px;
   }
   .add-vehicle {
     position: fixed;

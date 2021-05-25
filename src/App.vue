@@ -1,9 +1,9 @@
 <template>
   <div id="app">
-    <div id="nav">
+    <!-- <div id="nav">
       <router-link to="/supplier/login">供应商</router-link> |
       <router-link to="/seller/login">销售商</router-link>
-    </div>
+    </div> -->
     <router-view/>
   </div>
 </template>

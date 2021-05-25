@@ -27,8 +27,8 @@ export default {
   name: 'SalLogin',
   data () {
     return {
-      userName: 'wlt',
-      passWord: '123456'
+      userName: '',
+      passWord: ''
     }
   },
   methods: {

@@ -3,8 +3,8 @@
     <van-form>
       <van-field v-model="formData.ProductCount" type="number" label="数量" placeholder="请输入" />
       <van-field v-model="formData.ProductWeight" type="number" label="重量" placeholder="请输入" />
-      <van-field v-model="formData.UnitPrice" type="number" required label="单价" placeholder="请输入" />
-      <van-field v-model="formData.TotalPrice" type="number" required label="总价" placeholder="请输入" />
+      <van-field v-model="formData.UnitPrice" type="number" label="单价" placeholder="请输入" />
+      <van-field v-model="formData.TotalPrice" type="number" label="总价" placeholder="请输入" />
       <van-field v-model="formData.Customer" label="客户" placeholder="请输入" />
       <van-field v-model="formData.CustomerPhone" type="tel" label="客户电话" placeholder="请输入" />
       <van-field name="radio" label="付款情况">
@@ -26,6 +26,7 @@
     </van-form>
     <div style="margin-top: 100px;">
       <van-button type="info" class="save" @click="editSaleInfo">保存</van-button>
+      <van-button class="back" @click="goBack">返 回</van-button>
     </div>
   </div>
 </template>
@@ -88,6 +89,16 @@ export default {
             position: 'top'
           })
         })
+    },
+    // 返回
+    goBack () {
+      this.$router.push({
+        path: '/seller/sellList',
+        query: {
+          CarId: this.$route.query.CarId,
+          SaleId: this.$route.query.SaleId
+        }
+      })
     }
   }
 }
@@ -99,8 +110,11 @@ export default {
     height: 38px;
   }
   .save {
-    padding: 0 29px;
+    padding: 0 30px;
     margin-right: 20px;
+  }
+  .back {
+    padding: 0 30px;
   }
 }
 </style>
