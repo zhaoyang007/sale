@@ -31,6 +31,12 @@ export default {
       passWord: ''
     }
   },
+  created () {
+    if (localStorage.getItem('userName')) {
+      this.userName = localStorage.getItem('userName')
+      this.passWord = localStorage.getItem('passWord')
+    }
+  },
   methods: {
     login () {
       const params = {
@@ -41,6 +47,8 @@ export default {
         .then(res => {
           const data = res.data
           if (data.code === 0) {
+            localStorage.setItem('userName', this.userName)
+            localStorage.setItem('passWord', this.passWord)
             this.$router.push({
               path: '/seller/vehicleList',
               query: {

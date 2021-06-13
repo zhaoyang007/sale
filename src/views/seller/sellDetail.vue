@@ -3,6 +3,15 @@
     <van-form>
       <van-field v-model="formData.ProductCount" type="number" label="数量" placeholder="请输入" />
       <van-field v-model="formData.ProductWeight" type="number" label="重量" placeholder="请输入" />
+      <van-field
+        readonly
+        clickable
+        name="picker"
+        label="货号分类"
+        placeholder="请选择"
+        :value="categoryName"
+        @click="categoryShowPicker = true"
+      />
       <van-field v-model="formData.UnitPrice" type="number" label="单价" placeholder="请输入" />
       <van-field v-model="formData.TotalPrice" type="number" label="总价" placeholder="请输入" />
       <van-field v-model="formData.Customer" label="客户" placeholder="请输入" />
@@ -23,6 +32,16 @@
         type="textarea"
         placeholder="请输入"
       />
+      <van-popup v-model="categoryShowPicker" position="bottom">
+        <van-picker
+          show-toolbar
+          value-key="Text"
+          :columns="categoryColumns"
+          :default-index="categoryDefaultValue"
+          @confirm="categoryOnConfirm"
+          @cancel="categoryShowPicker = false"
+        />
+      </van-popup>
     </van-form>
     <div style="margin-top: 100px;">
       <van-button type="info" class="save" @click="editSaleInfo">保存</van-button>
@@ -40,17 +59,23 @@ export default {
       formData: {
         ProductCount: '',
         ProductWeight: '',
+        FruitCategory: '',
         UnitPrice: '',
         TotalPrice: '',
         Customer: '',
         CustomerPhone: '',
         IsPay: '',
         FlagType: ''
-      }
+      },
+      categoryColumns: [],
+      categoryDefaultValue: 0,
+      categoryName: '',
+      categoryShowPicker: false
     }
   },
   created () {
     const saleInfo = this.$route.query.saleInfo
+    this.getFruitCategory()
     if (saleInfo) {
       this.formData = saleInfo
     }
@@ -99,6 +124,36 @@ export default {
           SaleId: this.$route.query.SaleId
         }
       })
+    },
+    // 货号分类选择器
+    categoryOnConfirm (value) {
+      this.categoryName = value.Text
+      this.formData.FruitCategory = value.Value
+      this.categoryShowPicker = false
+    },
+    // 获取货号分类下拉列表
+    getFruitCategory () {
+      const params = {
+        CarId: this.$route.query.CarId
+      }
+      this.axios.get('/SaleCar/GetFruitDetail', { params })
+        .then(res => {
+          const data = res.data
+          this.categoryColumns = data || []
+          if (this.$route.query.saleInfo) {
+            // 获取下拉选择默认值
+            const categoryIndex = this.categoryColumns.findIndex(item => item.Value === this.formData.FruitCategory)
+            if (categoryIndex !== -1) {
+              this.categoryDefaultValue = categoryIndex
+              this.categoryName = this.categoryColumns[categoryIndex].Text
+            }
+          }
+        }).catch(() => {
+          Toast({
+            message: '请求失败',
+            position: 'top'
+          })
+        })
     }
   }
 }

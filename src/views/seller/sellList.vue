@@ -18,11 +18,25 @@
         <van-col span="12"></van-col>
       </van-row>
     </div>
+    <van-cell>
+      <van-row gutter="10">
+        <van-col span="8">货号分类</van-col>
+        <van-col span="8">剩余数量</van-col>
+        <van-col span="8">总量</van-col>
+      </van-row>
+    </van-cell>
+    <van-cell v-for="(item, index) in saleInfo.categoryList" :key="index">
+      <van-row gutter="10">
+        <van-col span="8">{{ item.FruitCategory }}</van-col>
+        <van-col span="8">{{ item.SaleNumCount }}</van-col>
+        <van-col span="8">{{ item.AllNumCount }}</van-col>
+      </van-row>
+    </van-cell>
     <van-button type="info" size="small" class="frush" @click="getSaleInfo">刷 新</van-button>
     <van-button type="info" size="small" @click="toSellDetail('')" style="margin-left: 20px;">添加售卖信息</van-button>
     <van-button size="small" class="back" @click="goBack">返 回</van-button>
     <van-cell
-      v-for="(item, index) in accountLists"
+      v-for="(item, index) in saleInfo.accountLists"
       :key="index"
       center
       :title="`件数:${item.ProductCount} 重量:${item.ProductWeight} 总价:${item.TotalPriceNum} 单价:${item.UnitPriceNum}`">
@@ -49,9 +63,10 @@ export default {
         PaidOut_Amoubt: '',
         Total_Nums: '',
         Total_Weight: '',
-        SaleId: 1
-      },
-      accountLists: []
+        SaleId: 1,
+        accountLists: [],
+        categoryList: []
+      }
     }
   },
   created () {
@@ -68,7 +83,6 @@ export default {
           const data = res.data
           if (data.code === 0) {
             this.saleInfo = data
-            this.accountLists = data.data || []
           } else {
             Toast({
               message: data.msg,
@@ -95,7 +109,8 @@ export default {
           Customer: item.Customer,
           CustomerPhone: item.CustomerPhone,
           IsPay: item.IsPay,
-          FlagType: item.FlagType
+          FlagType: item.FlagType,
+          FruitCategory: item.FruitDetail
         }
       }
       this.$router.push({
@@ -179,7 +194,7 @@ export default {
   text-align: left;
 }
 .frush {
-  margin-bottom: 20px;
+  margin: 20px 0;
   padding: 0 30px;
 }
 .back {
