@@ -39,7 +39,7 @@
       v-for="(item, index) in saleInfo.accountLists"
       :key="index"
       center
-      :title="`件数:${item.ProductCount} 重量:${item.ProductWeight} 总价:${item.TotalPriceNum} 单价:${item.UnitPriceNum}`">
+      :title="`件数:${item.ProductCount} 重量:${item.ProductWeight} 总价:${item.TotalPriceNum} 单价:${item.UnitPriceNum} 分类:${item.FruitDetail}`">
       <template #label>
         <div style="margin-bottom: 5px;">{{ `${item.IsPayStr} ${item.CreateTimeStr}`}}</div>
         <van-button type="info" size="mini" v-if="item.IsPay === 0" @click.stop="changePayState(item.Id, item.IsPay)"> {{ item.IsPayStr }}</van-button>
